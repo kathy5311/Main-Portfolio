@@ -1,9 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import font
+
 
 memo=Tk()
-memo.geometry("440x340+200+100")
+memo.geometry("440x360+200+100")
 memo.title("Make Checklist")
 memo.resizable(True,True)
 
@@ -51,8 +53,7 @@ def counting():
     global count
     for i in range(len(checklist)):
         count+=1
-    label=Label(memo, text="Number of Tasks: "+str(count))
-    label.pack()
+    label.config(text="Number of Tasks: "+str(count))
 
 # 수정
 def modi():
@@ -81,6 +82,12 @@ listbox.pack()
 
 scrollbar["command"]=listbox.yview
 
+style= ttk.Style()
+style.configure("BW.TLabel", foreground="black", background="white")
+font=font.Font(size=10)
+label=ttk.Label(text="Number of Tasks:", style="BW.TLabel", relief="solid", font=font)
+label.pack()
+
 entry= ttk.Entry(memo, width=40)
 entry.pack()
 
@@ -93,10 +100,10 @@ buttonHi=ttk.Button(memo, text="Highlight", command=highlight, width=20)
 buttonHi.pack()
 buttonAlDel=ttk.Button(memo, text="All Delete", command=aldel, width=20)
 buttonAlDel.pack()
-buttonCount=ttk.Button(memo, text="Num of Tasks", command=counting, width=20)
-buttonCount.pack()
 buttonMod=ttk.Button(memo, text="Modify", command=modi, width=20)
 buttonMod.pack()
+buttonCount=ttk.Button(memo, text="Num of Tasks", command=counting, width=20)
+buttonCount.pack()
 
 # mainloop()
 memo.mainloop()
